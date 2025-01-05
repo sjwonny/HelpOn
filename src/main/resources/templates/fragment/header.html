@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- fragment(조각)을 등록한다. fragment 이름은 header -->
+<header class="header" th:fragment="header">
+    <div class="header-container">
+        <a href="#" class="logo">HelpOn</a>
+        <nav class="nav" th:if="${session.userNumber == null}"> <!--if문-->
+            <a th:href="@{/user/login}" class="nav-item login">로그인</a>
+            <a th:href="@{/user/client/join}" class="nav-item join">의뢰인 가입</a>
+            <a th:href="@{/user/helper/joib}" class="nav-item join">헬퍼 가입</a>
+        </nav>
+        <nav class="nav" th:unless="${session.userNumber == null}"> <!--else문-->
+            <a th:href="@{/user/logout}" class="nav-item login">로그아웃</a>
+        </nav>
+    </div>
+    <div class="header2">
+        <nav class="nav1"> <!--if문-->
+            <a th:href="@{/user/client/list}" class="nav-item2 client">의뢰 리스트</a>
+            <a th:href="@{/user/helper/list}" class="nav-item2 helper">헬퍼 구하기</a>
+            <a th:href="@{/board/list}" class="nav-item2 board">게시판</a>
+        </nav>
+    </div>
+</body>
+</html>

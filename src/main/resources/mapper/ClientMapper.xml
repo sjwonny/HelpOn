@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.helpon.mapper.ClientMapper">
+
+   <insert id="insert">
+       <selectKey keyProperty="clientNumber" order="BEFORE" resultType="long">
+           SELECT SEQ_client.NEXTVAL FROM DUAL
+       </selectKey>
+       insert into TBL_CLIENT (CLIENT_NUMBER, START_TIME, END_TIME, PAY, REQUIRE)
+       values (#{clientNumber},#{startTime} , #{endTime},#{pay}, #{require})
+    </insert>
+</mapper>

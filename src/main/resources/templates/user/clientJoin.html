@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+<link rel="stylesheet" th:href="@{/css/user/clientLogin.css}"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" />
+
+</head>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script>
+
+   /* function updateImage(input) { //선택한 사진 미리보기로 보여줌
+      var image = document.getElementById('uploaded-image');
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          image.src = e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }*/
+   function updateImage(input) {
+     const file = input.files[0];
+     const uploadedImage = document.getElementById('uploaded-image');
+
+     if (file) {
+       const reader = new FileReader();
+       reader.onload = function (e) {
+         uploadedImage.src = e.target.result; // 선택한 이미지 미리보기
+       };
+       reader.readAsDataURL(file);
+     }
+   }
+
+    window.onload = function(){
+      document.getElementById("address_kakao").addEventListener("click", function(){ //주소입력칸을 클릭하면
+        //카카오 지도 발생
+        new daum.Postcode({
+          oncomplete: function(data) { //선택시 입력값 세팅
+            document.getElementById("address_kakao").value = data.address; // 주소 넣기
+            document.querySelector("input[name=de_adr]").focus(); //상세입력 포커싱
+          }
+        }).open();
+      });
+    }
+  </script>
+
+<body>
+<header class="header" th:replace="fragment/header :: header"></header>
+<h1 class="login-title">의뢰인 로그인</h1>
+
+<form class="login-form" id="clientForm" name="insert" action="/user/client/join" method="post" >
+  <div class="form-body clearfix">
+    <input type="hidden" name = "userType" value="1">
+<!--    <div class="form-group">-->
+<!--      <img id="uploaded-image"  src="https://iiiiimo.net/assets/img/icon/icons8-user.png">-->
+<!--      <input type="file" id="post-image" name="profileFile" accept="image/*" multiple  onchange="updateImage(this)"/>-->
+<!--    </div>-->
+    <div class="form-group">
+      <img id="uploaded-image" src="https://iiiiimo.net/assets/img/icon/icons8-user.png" alt="프로필 이미지">
+      <label for="post-image" class="custom-file-button">+</label>
+      <input type="file" id="post-image" name="profileFile" accept="image/*" multiple onchange="updateImage(this)" />
+    </div>
+    <div class="input-group">
+      <label for="userId">아이디</label>
+      <input type="text" id="userId" name="userId" required />
+    </div>
+    <div class="input-group">
+      <label for="userPassword">비밀번호</label>
+      <input type="password" id="userPassword" name="userPassword" required />
+    </div>
+    <div class="input-group">
+      <label for="confirm-password">비밀번호 확인</label>
+      <input type="password" id="confirm-password" name="confirm-password" required />
+    </div>
+    <div class="input-group">
+      <label for="userName">이름</label>
+      <input type="text" id="userName" name="userName" required />
+    </div>
+    <div class="input-group">
+      <label for="userPhone">휴대폰번호</label>
+      <input type="text" id="userPhone" name="userPhone" required />
+    </div>
+    <div class="input-group">
+      <label for="address_kakao">주소</label>
+      <input type="hidden" name = "userAddress">
+      <input type="text" id="address_kakao" name="address" required placeholder="주소를 입력해 주세요"/>
+    </div>
+    <div class="input-group">
+      <label for="de_adr">상세주소</label>
+      <input type="text" id="de_adr" name="de_adr" required placeholder="상세주소를 입력해 주세요"/>
+    </div>
+
+    <div class="select_form"></div>
+    <div class="form-field-group">
+      <label class="form_title" for="field1">분야1</label>
+      <select class="ins1" id="field1" name="field1">
+        <option value=""></option>
+        <option value="영유아">영유아</option>
+        <option value="청소">청소</option>
+        <option value="놀이/교육">놀이/교육</option>
+        <option value="신생아">신생아</option>
+        <option value="음식">음식</option>
+        <option value="등하원">등하원</option>
+        <option value="간병">간병</option>
+        <option value="장애인">장애인</option>
+        <option value="반려동물">반려동물</option>
+        <option value="기타">기타</option>
+      </select>
+    </div>
+
+    <div class="form-field-group">
+      <label class="form_title" for="field2">분야2</label>
+      <select class="ins1"  id="field2" name="field2">
+        <option value=""></option>
+        <option value="영유아">영유아</option>
+        <option value="청소">청소</option>
+        <option value="놀이/교육">놀이/교육</option>
+        <option value="신생아">신생아</option>
+        <option value="음식">음식</option>
+        <option value="등하원">등하원</option>
+        <option value="간병">간병</option>
+        <option value="장애인">장애인</option>
+        <option value="반려동물">반려동물</option>
+        <option value="기타">기타</option>
+      </select>
+    </div>
+
+    <div class="form-field-group">
+      <label class="form_title" for="choice">형태</label>
+      <select class="ins1" id="choice" name="choice">
+        <option value=""></option>
+        <option value="방문">방문</option>
+        <option value="입주">입주</option>
+        <option value="재택">재택</option>
+      </select>
+    </div>
+
+    <div class="form-field-group">
+      <label class="form_title" >희망요일</label>
+      <div class="ins1" style="font-size:0.9rem;">
+        <div th:each="day : ${dayList}">
+          <input type="checkbox" th:name="dayNumbers" th:value="${day.dayNumber}"
+                 th:id="'day-' + ${day.dayNumber}">
+          <label th:for="'day-' + ${day.dayNumber}" th:text="${day.day}"></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-field-group">
+      <label class="form_title" >희망시간</label>
+      <div>시작시간</div>
+      <select class="ins1" id="startTime" name="startTime" data-size="5">
+        <option value=""> 시작시간 </option>
+        <option th:each="time : ${timeList}" th:value="${time.timeNumber}" th:text="${time.time}"></option>
+      </select>
+      <div>종료시간</div>
+      <select class="ins1" id="endTime" name="endTime" data-size="5">
+        <option value=""> 종료시간 </option>
+        <option th:each="time : ${timeList}" th:value="${time.timeNumber}" th:text="${time.time}"></option>
+      </select>
+    </div>
+
+    <div class="form-field-group">
+      <label class="form_title" for="pay">시간당 사례비</label>
+      <input type="number" class="ins1" id="pay" name="pay" value="" placeholder="평균 10,000원"></div>
+  </div>
+
+  <div class="form-field-group">
+    <label class="form_title" for="require">요구사항</label>
+    <textarea class="ins1" id="require" name="require" placeholder="Ex) 근무시간(주5회/6회) 희망국적, 경력, CCTV여부, 반려동물여부, 면접비, 우대사항, 요청서류(주민등록등본 사본과 3개월 이내 건강검진서, 신분증빙서류) 소개업체의 연락은 정중히 거절합니다 등" rows="7"></textarea>
+  </div>
+
+  <div class="join_btn">
+        <button id="user-submit" class="submit-btn" type="submit" onclick="javascript:checkJoin()">등록</button>
+      </div>
+    </form>
+
+  </div>
+
+</body>
+
+
+  <script>
+    function checkJoin(){
+    var j = document.insert;
+
+    j.userAddress.value =  j.address.value + "_" + j.de_adr.value; //주소와 상세주소를 _로 연결해 input hidden name에 저장
+    j.submit();}
+
+</script>
+</html>

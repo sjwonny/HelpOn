@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.header {
+    background-color: #fff;
+    border-bottom: 1px solid #ebebeb;
+    padding: 20px 0;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 33px;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+}
+
+.nav {
+    display: flex;
+}
+
+.nav-item {
+    font-size: 16px;
+    color: #00c7ae;
+    text-decoration: none;
+    margin-left: 20px;
+    border: 1px solid #00c7ae;
+    border-radius: 5px;
+    padding: 7px;
+}
+
+.nav-item:hover {
+    background-color: #00c7ae;
+    color: white;
+}
+.header2 .nav1 {
+    display: flex; /* 플렉스 컨테이너 활성화 */
+    justify-content: center; /* 가로 방향 중앙 정렬 */
+    align-items: center; /* 세로 방향 중앙 정렬 */
+    gap: 100px;
+
+
+}
+.header2 .nav1 .nav-item2 {
+    font-size: 25px; /* 글씨 크기 조정 */
+    font-weight: bold; /* 글씨 두껍게 */
+    color: #333; /* 글자 색상 */
+    letter-spacing: 1.5px; /* 글자 간격 넓히기 */
+    text-decoration: none; /* 링크 밑줄 제거 */
+    transition: color 0.3s ease; /* 마우스 호버 시 부드러운 색상 변화 효과 */
+}
+
+.header2 .nav1 .nav-item2:hover {
+    color: #007BFF; /* 마우스 올렸을 때 글자 색상 변경 */
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.example.helpon.dto.BoardDto" alias="boardDto"/>
+        <typeAlias type="com.example.helpon.dto.CertificateDto" alias="certificateDto"/>
+        <typeAlias type="com.example.helpon.dto.FileDto" alias="fileDto"/>
+        <typeAlias type="com.example.helpon.dto.ReplyDto" alias="replyDto"/>
+        <typeAlias type="com.example.helpon.dto.UserDto" alias="userDto"/>
+        <typeAlias type="com.example.helpon.dto.ClientDto" alias="clientDto"/>
+        <typeAlias type="com.example.helpon.dto.DayDto" alias="dayDto"/>
+        <typeAlias type="com.example.helpon.dto.Desired_dayDto" alias="desiredDayDto"/>
+        <typeAlias type="com.example.helpon.dto.Helper_certificateDto" alias="helperCertificateDto"/>
+        <typeAlias type="com.example.helpon.dto.HelperDto" alias="helperDto"/>
+        <typeAlias type="com.example.helpon.dto.Profile_fileDto" alias="profileFileDto"/>
+        <typeAlias type="com.example.helpon.dto.TimeDto" alias="timeDto"/>
+
+
+    </typeAliases>
+
+</configuration>
