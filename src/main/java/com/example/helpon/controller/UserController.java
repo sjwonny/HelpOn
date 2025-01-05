@@ -1,10 +1,8 @@
 package com.example.helpon.controller;
 
-import com.example.helpon.dto.ClientDto;
-import com.example.helpon.dto.DayDto;
-import com.example.helpon.dto.TimeDto;
-import com.example.helpon.dto.UserDto;
+import com.example.helpon.dto.*;
 import com.example.helpon.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +26,19 @@ public class UserController {
     @GetMapping("/login")
     public void login(){}
 
+    @PostMapping("/login")
+    public RedirectView login(String userId, String userPassword, HttpServletRequest req){
+        try {
+            Long userNumber = userService.findUserNumber(userId, userPassword);
+            req.getSession().setAttribute("userNumber", userNumber);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new RedirectView("/user/login");
+        }
+        return new RedirectView("/user/login");
+    }
+
+
     @GetMapping("/client/join")
     public String clientJoin(Model model){
        List<DayDto> dayList =  userService.getDay();
@@ -40,8 +51,21 @@ public class UserController {
     @PostMapping("/client/join")
     public RedirectView clientJoin(UserDto userDto, ClientDto clientDto, @RequestParam List<Long> dayNumbers){
         userService.register(userDto, clientDto, dayNumbers);
-        System.out.println("userName 값: " + userDto.getUserName());
-        System.out.println("Field1 값: " + userDto.getField1());
+
+        return new RedirectView("/user/login");
+    }
+
+    @GetMapping("/helper/join")
+    public String helperJoin(Model model){
+        List<CertificateDto> certificateList =  userService.getCertificate();
+        model.addAttribute("cList", certificateList);
+        return "user/HelperJoin";
+    }
+
+    @PostMapping("/helper/join")
+    public RedirectView helperJoin(UserDto userDto, HelperDto helperDto, @RequestParam List<Long> certificateNumbers){
+        userService.helperRegister(userDto, helperDto, certificateNumbers);
+
         return new RedirectView("/user/login");
     }
 }

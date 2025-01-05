@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,7 +18,9 @@ public class UserService {
     private final DayMapper dayMapper;
     private final TimeMapper timeMapper;
     private final Desired_dayMapper desired_dayMapper;
-
+    private final CertificateMapper certificateMapper;
+    private final HelperMapper helperMapper;
+    private final Helper_certificateMapper helper_certificateMapper;
 
     //클라이언트 회원 등록
     public void register(UserDto userDto, ClientDto clientDto, List<Long> dayNumbers){
@@ -33,16 +36,49 @@ public class UserService {
         }
     }
 
+    //헬퍼 회원 등록
+    public void helperRegister(UserDto userDto, HelperDto helperDto, List<Long> certificateNumbers){
+        if(userDto == null || helperDto == null){throw new IllegalArgumentException("헬퍼 회원 정보 누락");}
+        if(certificateNumbers == null){ throw new IllegalArgumentException("자격증이 선택되지 않았습니다");}
+        userMapper.insert(userDto);
+        helperMapper.insert(helperDto);
+        for (Long certificateNumber : certificateNumbers) {
+            Helper_certificateDto helperCertificateDto = new Helper_certificateDto();
+            helperCertificateDto.setHelperNumber(helperDto.getHelperNumber());
+            helperCertificateDto.setCertificateNumber(certificateNumber);
+            helper_certificateMapper.insert(helperCertificateDto);
+        }
+
+
+    }
+
     //요일 리스트 가져오기
     @Transactional(readOnly = true)
     public List<DayDto> getDay(){
-       return dayMapper.getDay();
+       return Optional.ofNullable(dayMapper.getDay())
+               .orElseThrow(()-> {throw new IllegalArgumentException("요일이 존재하지 않습니다.");});
     }
 
     //시간 리스트 가져오기
     @Transactional(readOnly = true)
     public List<TimeDto> getTime(){
-        return timeMapper.getTime();
+        return Optional.ofNullable(timeMapper.getTime())
+                .orElseThrow(()-> {throw new IllegalArgumentException("시간이 존재하지 않습니다");});
+    }
+
+    // 자격증 리스트 가져오기
+    @Transactional(readOnly = true)
+    public List<CertificateDto> getCertificate(){
+        return Optional.ofNullable(certificateMapper.getCertificate())
+                .orElseThrow(()-> {throw new IllegalArgumentException("자격증이 존재하지 않습니다.");});
+    }
+
+    //유저 넘버 가져오기
+    @Transactional(readOnly = true)
+    public Long findUserNumber(String userId, String userPassword){
+        if(userId == null || userPassword == null) {throw new IllegalArgumentException("아이디, 패스워드 누락");};
+        return Optional.ofNullable(userMapper.selectUserNumber(userId, userPassword))
+                .orElseThrow(()->{throw new IllegalArgumentException("존재하지 않는 회원입니다.");});
     }
 
 }

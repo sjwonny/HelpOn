@@ -12,7 +12,7 @@
         <nav class="nav" th:if="${session.userNumber == null}"> <!--if문-->
             <a th:href="@{/user/login}" class="nav-item login">로그인</a>
             <a th:href="@{/user/client/join}" class="nav-item join">의뢰인 가입</a>
-            <a th:href="@{/user/helper/joib}" class="nav-item join">헬퍼 가입</a>
+            <a th:href="@{/user/helper/join}" class="nav-item join">헬퍼 가입</a>
         </nav>
         <nav class="nav" th:unless="${session.userNumber == null}"> <!--else문-->
             <a th:href="@{/user/logout}" class="nav-item login">로그아웃</a>

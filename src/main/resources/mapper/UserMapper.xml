@@ -11,4 +11,9 @@
        USER_TYPE)
        values (#{userNumber},#{userId},#{userPassword},#{userName},#{userPhone},#{userAddress},#{field1},#{field2},#{choice},#{userType})
     </insert>
+
+    <select id="selectUserNumber" resultType ="long">
+        select user_number from tbl_user
+        where user_id = #{userId} and user_password =#{userPassword}
+    </select>
 </mapper>

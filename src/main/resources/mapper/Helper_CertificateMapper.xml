@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.helpon.mapper.Helper_certificateMapper">
+
+    <insert id="insert">
+        <selectKey keyProperty="helperCertificateNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_helper_certificate.NEXTVAL FROM DUAL
+        </selectKey>
+        insert into TBL_HELPER_CERTIFICATE (HELPER_CERTIFICATE_NUMBER, HELPER_NUMBER, CERTIFICATE_NUMBER)
+        values (#{helperCertificateNumber}, #{helperNumber},#{certificateNumber})
+    </insert>
+</mapper>

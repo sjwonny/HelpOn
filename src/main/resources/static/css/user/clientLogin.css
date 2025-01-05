@@ -212,3 +212,20 @@ button:hover {
 .custom-file-button:hover {
     background-color: #45a049;
 }
+.small-font {
+    font-size: 0.8rem; /* 원하는 크기로 설정 */
+    color : red;
+}
+
+.input.group1 {
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    gap: 20px;
+}
+.input.group1 input {
+    margin-right: 10px; /* 라디오 버튼과 텍스트 간의 간격 */
+}
+.input.group1 label {
+    margin-left: 20px; /* 라디오 버튼과 텍스트 간의 간격 */
+}
