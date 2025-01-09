@@ -39,6 +39,9 @@ dependencies {
     testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.4'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
+    // https://mvnrepository.com/artifact/net.coobird/thumbnailator
+    implementation 'net.coobird:thumbnailator:0.4.19'
+
     //테스트 코드에 롬복 적용
     testAnnotationProcessor 'org.projectlombok:lombok'
 
@@ -48,6 +51,8 @@ dependencies {
     implementation 'jakarta.servlet:jakarta.servlet-api' //스프링부트 3.0 이상
     implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api' //스프링부트 3.0 이상
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl' //스프링부트 3.0 이상
+
+
 }
 
 tasks.named('test') {

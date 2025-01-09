@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.helpon.mapper.ProfileFileMapper">
+   <insert id = "insert">
+       <selectKey keyProperty="profileFileNumber" order="BEFORE" resultType="long">
+           SELECT SEQ_profile_file.NEXTVAL FROM DUAL
+       </selectKey>
+       insert into TBL_PROFILE_FILE (PROFILE_FILE_NUMBER, PROFILE_FILE_NAME, PROFILE_FILE_UPLOAD_PATH, PROFILE_FILE_UUID,
+                                     USER_NUMBER)
+       values (#{profileFileNumber},#{profileFIleName}, #{profileFileUploadPath}, #{profileFileUuid}, #{userNumber})
+   </insert>
+
+    <delete id ="delete">
+        delete from profile_file where user_number = #{userNumber}
+    </delete>
+
+    <select id="select" resultType="profileFileDto">
+        select profile_file_number, profile_file_name, profile_file_upload_path, profile_file_uuid, user_number
+        from profile_file
+        where user_number = #{userNumber}
+    </select>
+</mapper>
