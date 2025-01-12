@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.helpon.mapper.FileMapper">
+
+   <insert id="insert">
+       insert into TBL_FILE (FILE_NUMBER, FILE_NAME, FILE_UPLOAD_PATH, FILE_UUID, BOARD_NUMBER)
+       values (seq_file.nextval, #{fileName}, #{fileUploadPath}, #{fileUuid} , #{boardNumber})
+    </insert>
+
+
+    <delete id="delete">
+        delete from tbl_file where board_number = #{boardNumber}
+    </delete>
+
+    <select id="selectList" resultType ="fileDto">
+        select * from tbl_file
+        where board_number = #{boardNumber}
+    </select>
+
+    <!--파일 올린 날짜가 어제인 애들 가져오기-->
+    <select id="selectOldList" resultType="fileDto">
+        select * from tbl_file
+        where file_upload_path = to_char(current_date - 1, 'YYYY/MM/DD')
+    </select>
+
+
+</mapper>

@@ -9,7 +9,16 @@
 <body>
 <div class="login-container">
   <h1 class="login-title">로그인</h1>
+  <div class="login-title-container">
+    <div class="helper-log">
+      <a href="/user/helperLogin"><h5>헬퍼 로그인</h5>
+    </div>
+    <div class="client-log">
+      <h5>의뢰인 로그인</h5></a>
+    </div>
+  </div>
   <form class="login-form" action="/user/login" method="post">
+    <input type="hidden" name = "userType" value="1">
     <div class="input-group">
       <label for="userId">아이디</label>
       <input type="text" id="userId" name="userId" required />

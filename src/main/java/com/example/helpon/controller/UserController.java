@@ -26,19 +26,22 @@ public class UserController {
     @GetMapping("/index")
     public void index(){}
 
-    @GetMapping("/login")
-    public void login(){}
+    @GetMapping("/helperLogin")
+    public void login1(){}
+
+    @GetMapping("/clientLogin")
+    public void login2(){}
 
     @PostMapping("/login")
-    public RedirectView login(String userId, String userPassword, HttpServletRequest req){
+    public RedirectView login(String userId, String userPassword,Long userType, HttpServletRequest req){
         try {
-            Long userNumber = userService.findUserNumber(userId, userPassword);
+            Long userNumber = userService.findUserNumber(userId, userPassword, userType);
             req.getSession().setAttribute("userNumber", userNumber);
         } catch (Exception e) {
             e.printStackTrace();
             return new RedirectView("/user/login");
         }
-        return new RedirectView("/user/login");
+        return new RedirectView("/board/list");
     }
 
 

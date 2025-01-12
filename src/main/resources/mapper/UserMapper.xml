@@ -14,6 +14,6 @@
 
     <select id="selectUserNumber" resultType ="long">
         select user_number from tbl_user
-        where user_id = #{userId} and user_password =#{userPassword}
+        where user_id = #{userId} and user_password =#{userPassword} and user_type = #{userType}
     </select>
 </mapper>

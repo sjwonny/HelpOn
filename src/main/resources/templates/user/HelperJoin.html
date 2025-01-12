@@ -13,16 +13,6 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 
-    /* function updateImage(input) { //선택한 사진 미리보기로 보여줌
-       var image = document.getElementById('uploaded-image');
-       if (input.files && input.files[0]) {
-         var reader = new FileReader();
-         reader.onload = function(e) {
-           image.src = e.target.result;
-         };
-         reader.readAsDataURL(input.files[0]);
-       }
-     }*/
     function updateImage(input) {
         const file = input.files[0];
         const uploadedImage = document.getElementById('uploaded-image');
@@ -51,15 +41,11 @@
 
 <body>
 <header class="header" th:replace="fragment/header :: header"></header>
-<h1 class="login-title">의뢰인 로그인</h1>
+<h1 class="login-title">헬퍼 회원가입</h1>
 
 <form class="login-form" id="clientForm" name="insert" action="/user/helper/join" method="post" enctype="multipart/form-data">
     <div class="form-body clearfix">
         <input type="hidden" name = "userType" value="2">
-        <!--    <div class="form-group">-->
-        <!--      <img id="uploaded-image"  src="https://iiiiimo.net/assets/img/icon/icons8-user.png">-->
-        <!--      <input type="file" id="post-image" name="profileFile" accept="image/*" multiple  onchange="updateImage(this)"/>-->
-        <!--    </div>-->
         <div class="form-group">
             <img id="uploaded-image" src="https://iiiiimo.net/assets/img/icon/icons8-user.png" alt="프로필 이미지">
             <label for="post-image" class="custom-file-button">+</label>

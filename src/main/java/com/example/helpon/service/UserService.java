@@ -75,9 +75,9 @@ public class UserService {
 
     //유저 넘버 가져오기
     @Transactional(readOnly = true)
-    public Long findUserNumber(String userId, String userPassword){
+    public Long findUserNumber(String userId, String userPassword, Long userType){
         if(userId == null || userPassword == null) {throw new IllegalArgumentException("아이디, 패스워드 누락");};
-        return Optional.ofNullable(userMapper.selectUserNumber(userId, userPassword))
+        return Optional.ofNullable(userMapper.selectUserNumber(userId, userPassword, userType))
                 .orElseThrow(()->{throw new IllegalArgumentException("존재하지 않는 회원입니다.");});
     }
 

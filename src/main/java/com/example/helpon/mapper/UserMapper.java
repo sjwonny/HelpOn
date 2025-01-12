@@ -9,5 +9,6 @@ public interface UserMapper {
 
     public void insert(UserDto userDto);
 
-    public Long selectUserNumber(@Param("userId") String userId,@Param("userPassword") String userPassword);
+    public Long selectUserNumber(@Param("userId") String userId,@Param("userPassword") String userPassword,
+                                 @Param("userType") Long userType);
 }

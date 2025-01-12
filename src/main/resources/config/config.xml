@@ -15,6 +15,9 @@
         <typeAlias type="com.example.helpon.dto.HelperDto" alias="helperDto"/>
         <typeAlias type="com.example.helpon.dto.Profile_fileDto" alias="profileFileDto"/>
         <typeAlias type="com.example.helpon.dto.TimeDto" alias="timeDto"/>
+        <typeAlias type="com.example.helpon.vo.BoardVo" alias="boardVo"/>
+        <typeAlias type="com.example.helpon.vo.Criteria" alias="criteria"/>
+
 
 
     </typeAliases>
