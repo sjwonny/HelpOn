@@ -33,7 +33,7 @@ public class UserController {
     public void login2(){}
 
     @PostMapping("/login")
-    public RedirectView login(String userId, String userPassword,Long userType, HttpServletRequest req){
+    public RedirectView login(String userId, String userPassword, Long userType, HttpServletRequest req){
         try {
             Long userNumber = userService.findUserNumber(userId, userPassword, userType);
             req.getSession().setAttribute("userNumber", userNumber);
@@ -89,5 +89,11 @@ public class UserController {
 
         }
         return new RedirectView("/user/login");
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest req){
+        req.getSession().invalidate();//세션 초기화
+        return "user/login";
     }
 }

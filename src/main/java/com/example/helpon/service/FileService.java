@@ -151,7 +151,7 @@ public class FileService {
         fileDto.setFileUuid(uuid.toString());
         fileDto.setFileName(originName);
         fileDto.setFileUploadPath(getUploadPath());
-
+        System.out.println("파일 디티오" + fileDto.toString());
         return fileDto;
     }
 

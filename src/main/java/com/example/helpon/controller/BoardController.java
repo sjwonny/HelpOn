@@ -32,6 +32,7 @@ public class BoardController {
     @GetMapping("/list")
     public String showBoardList(Criteria criteria, Model model){
         List<BoardVo> boardList = boardService.findAll(criteria);
+
         model.addAttribute("boardList", boardList);
         model.addAttribute("pageInfo", new PageVo(criteria, boardService.getTotal()));
 
@@ -66,5 +67,12 @@ public class BoardController {
             }
         }
         return new RedirectView("/board/list");
+    }
+
+    @GetMapping("/view")
+    public String boardView(Long boardNumber, Model model){
+       BoardVo boardVo =  boardService.findBoard(boardNumber);
+       model.addAttribute("board" , boardVo);
+       return "/board/boardView";
     }
 }

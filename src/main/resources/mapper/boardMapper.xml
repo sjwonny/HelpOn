@@ -29,7 +29,7 @@
     </select>
 
     <select id="selectAll" resultType="boardVo">
-        SELECT BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, to_char(BOARD_REGISTER_DATE,'YYYY-MM-DD') as boardRegisterDate, BOARD_UPDATE_DATE,
+        SELECT BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, BOARD_REGISTER_DATE, BOARD_UPDATE_DATE,
                USER_NUMBER, USER_ID,
                FILE_UPLOAD_PATH, FILE_UUID, FILE_NAME
         FROM(
