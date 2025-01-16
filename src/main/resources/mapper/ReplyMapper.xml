@@ -1,59 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.example.helpon.mapper.ReplyMapper">
     <insert id="insert">
-        <selectKey keyProperty="replyNumber" order="BEFORE" resultType="long">
-            SELECT SEQ_Reply.NEXTVAL FROM DUAL
-        </selectKey>
-        insert into TBL_REPLY (REPLY_NUMBER, REPLY_CONTENT, REPLY_REGISTER_DATE, BOARD_NUMBER, USER_NUMBER)
-        values (#{replyNumber},#{replyContent},sysdate,,#{boardNumber},#{userNumber});
+        INSERT INTO TBL_REPLY (REPLY_NUMBER, REPLY_CONTENT, BOARD_NUMBER, USER_NUMBER)
+        VALUES (SEQ_REPLY.NEXTVAL, #{replyContent}, #{boardNumber}, #{userNumber})
     </insert>
 
-    <delete id="delete">
-        DELETE FROM TBL_reply
-        WHERE reply_NUMBER = #{replyNumber}
-    </delete>
-
-    <update id="update">
-        UPDATE TBL_reply
-        SET reply_content = #{replyContent}, reply_update_date = sysdate
-        WHERE reply_NUMBER = #{replyNumber}
-    </update>
+    <select id="selectList" resultType="replyVo">
+        SELECT REPLY_NUMBER, REPLY_CONTENT, REPLY_REGISTER_DATE, REPLY_UPDATE_DATE, BOARD_NUMBER, U.USER_NUMBER,
+               U.USER_ID
+        FROM TBL_USER U JOIN TBL_REPLY R
+                             ON U.USER_NUMBER = R.USER_NUMBER
+        WHERE BOARD_NUMBER = #{boardNumber}
+        ORDER BY REPLY_NUMBER DESC
+    </select>
 
     <select id="select" resultType="replyVo">
-        SELECT reply_number, reply_content, reply_register_date, reply_update_date,board_number
-               r.USER_NUMBER, U.USER_ID
-        FROM TBL_reply_r JOIN TBL_USER U
-                              ON reply_number = #{replyNumber} AND r.USER_NUMBER = U.USER_NUMBER
+        SELECT REPLY_NUMBER, REPLY_CONTENT, REPLY_REGISTER_DATE, REPLY_UPDATE_DATE, BOARD_NUMBER, U.USER_NUMBER,
+               U.USER_ID
+        FROM TBL_USER U JOIN TBL_REPLY R
+                             ON REPLY_NUMBER = #{replyNumber} AND R.USER_NUMBER = U.USER_NUMBER
     </select>
 
-    <select id="selectList" resultType="replyVo">
-        select reply_number, reply_content, reply_register_date, reply_update_date, board_number,r.user_number, u.user_id
-        from tbl_reply r join tbl_user u
-        on board_number={boardNumber}
-        order by reply_number desc
-    </select>
-    <select id="selectListPage" resultType="boardVo">
-        SELECT select reply_number, reply_content, reply_register_date, reply_update_date, board_number,r.user_number, u.user_id
-        FROM(
-                SELECT ROWNUM AS RNUM, reply_number, reply_content, reply_register_date, reply_update_date, board_number,r.user_number, u.user_id
-                FROM(
-                        select reply_number, reply_content, reply_register_date, reply_update_date, board_number,r.user_number, u.user_id
-                        from tbl_reply r join tbl_user u
-                                              on board_number={boardNumber} and u.user_number = r.user_number
-                        ORDER BY r.reply_number DESC
-                    )
-        <![CDATA[
-                WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
+    <update id="update">
+        UPDATE TBL_REPLY
+        SET REPLY_CONTENT = #{replyContent} , REPLY_UPDATE_DATE = SYSDATE
+        WHERE REPLY_NUMBER = #{replyNumber}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM TBL_REPLY
+        WHERE REPLY_NUMBER = #{replyNumber}
+    </delete>
+
+    <select id="selectListPage" resultType="replyVo">
+        SELECT REPLY_NUMBER, REPLY_CONTENT, REPLY_REGISTER_DATE, REPLY_UPDATE_DATE, BOARD_NUMBER, USER_NUMBER,
+               USER_ID
+        FROM (
+                 SELECT ROWNUM RN,
+                        REPLY_NUMBER, REPLY_CONTENT, REPLY_REGISTER_DATE, REPLY_UPDATE_DATE, BOARD_NUMBER, USER_NUMBER,
+                        USER_ID
+                 FROM(
+                         SELECT REPLY_NUMBER, REPLY_CONTENT, REPLY_REGISTER_DATE, REPLY_UPDATE_DATE, BOARD_NUMBER, U.USER_NUMBER,
+                                U.USER_ID
+                         FROM TBL_USER U JOIN TBL_REPLY R
+                                              ON BOARD_NUMBER = #{boardNumber} AND U.USER_NUMBER = R.USER_NUMBER
+                         ORDER BY REPLY_NUMBER DESC
+                     )
+            <![CDATA[
+                 WHERE ROWNUM <= #{criteria.page} * #{criteria.amount}
             ]]>
         )
-        WHERE RNUM > (#{criteria.page} - 1) * #{criteria.amount}
+        WHERE RN > ( #{criteria.page} - 1 ) * #{criteria.amount}
     </select>
 
     <select id="selectTotal" resultType="_int">
-        SELECT COUNT(reply_NUMBER) FROM TBL_reply
-        where board_number = #{boardNumber}
+        SELECT COUNT(REPLY_NUMBER)
+        FROM TBL_REPLY
+        WHERE BOARD_NUMBER = #{boardNumber}
     </select>
 
 </mapper>
+
+

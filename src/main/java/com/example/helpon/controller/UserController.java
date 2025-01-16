@@ -3,6 +3,7 @@ package com.example.helpon.controller;
 import com.example.helpon.dto.*;
 import com.example.helpon.service.FileService;
 import com.example.helpon.service.UserService;
+import com.example.helpon.vo.ClientVo;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -66,7 +67,7 @@ public class UserController {
                 e.printStackTrace();
             }
         }
-        return new RedirectView("/user/login");
+        return new RedirectView("/user/clientLogin");
     }
 
     @GetMapping("/helper/join")
@@ -88,12 +89,24 @@ public class UserController {
             }
 
         }
-        return new RedirectView("/user/login");
+        return new RedirectView("/user/helperLogin");
     }
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest req){
         req.getSession().invalidate();//세션 초기화
         return "user/login";
+    }
+
+    @GetMapping("/helper/list")
+    public String helperList(){
+
+        return "user/helperList";
+    }
+    @GetMapping("/client/list")
+    public String clientList(Model model){
+        List<ClientVo> clientList = userService.findClientList();
+        model.addAttribute("clientList", clientList);
+        return "user/clientList";
     }
 }

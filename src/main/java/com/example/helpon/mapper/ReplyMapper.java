@@ -12,10 +12,10 @@ import java.util.List;
 public interface ReplyMapper {
 
     public void insert(ReplyDto replyDto);
-    public void delete(Long replyNumber);
-    public void update(ReplyDto replyDto);
-    public ReplyVo select(Long replyNumber);
     public List<ReplyVo> selectList(Long boardNumber);
-    public List<ReplyVo> selectListPage(@Param("criteria") Criteria criteria, @Param("boardNumber")Long boardNumber);
+    public ReplyVo select(Long replyNumber);
+    public void update(ReplyDto replyDto);
+    public void delete(Long replyNumber);
+    public List<ReplyVo> selectListPage(@Param("criteria") Criteria criteria, @Param("boardNumber") Long boardNumber);
     public int selectTotal(Long boardNumber);
 }

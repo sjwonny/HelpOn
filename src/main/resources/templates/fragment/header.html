@@ -6,24 +6,26 @@
 </head>
 <body>
 <!-- fragment(조각)을 등록한다. fragment 이름은 header -->
+<link rel="stylesheet" th:href="@{/css/fragment/header.css}">
 <header class="header" th:fragment="header">
     <div class="header-container">
-        <a  th:href="@{/user/index}" class="logo">HelpOn</a>
-        <nav class="nav" th:if="${session.userNumber == null}"> <!--if문-->
+        <a href="@{/user/index}" class="logo">HelpOn</a>
+        <nav class="nav" th:if="${session.userNumber == null}">
             <a th:href="@{/user/helperLogin}" class="nav-item login">로그인</a>
             <a th:href="@{/user/client/join}" class="nav-item join">의뢰인 가입</a>
             <a th:href="@{/user/helper/join}" class="nav-item join">헬퍼 가입</a>
         </nav>
-        <nav class="nav" th:unless="${session.userNumber == null}"> <!--else문-->
+        <nav class="nav" th:unless="${session.userNumber == null}">
             <a th:href="@{/user/logout}" class="nav-item login">로그아웃</a>
         </nav>
     </div>
     <div class="header2">
-        <nav class="nav1"> <!--if문-->
+        <nav class="nav1">
             <a th:href="@{/user/client/list}" class="nav-item2 client">의뢰 리스트</a>
             <a th:href="@{/user/helper/list}" class="nav-item2 helper">헬퍼 구하기</a>
             <a th:href="@{/board/list}" class="nav-item2 board">게시판</a>
         </nav>
     </div>
+</header>
 </body>
 </html>

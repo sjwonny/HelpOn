@@ -6,7 +6,7 @@
         <selectKey keyProperty="boardNumber" order="BEFORE" resultType="long">
             SELECT SEQ_BOARD.NEXTVAL FROM DUAL
         </selectKey>
-        INSERT INTO TBL_BOARD(BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, Board_register_date,USER_NUMBER)
+        INSERT INTO TBL_BOARD(BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, BOARD_REGISTER_DATE,USER_NUMBER)
         VALUES (#{boardNumber}, #{boardTitle}, #{boardContent}, sysdate, #{userNumber})
     </insert>
 
@@ -29,7 +29,7 @@
     </select>
 
     <select id="selectAll" resultType="boardVo">
-        SELECT BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, BOARD_REGISTER_DATE, BOARD_UPDATE_DATE,
+        SELECT BOARD_NUMBER, BOARD_TITLE, BOARD_CONTENT, TO_CHAR(BOARD_REGISTER_DATE,'YYYY-MM-DD') AS BOARD_REGISTER_DATE, BOARD_UPDATE_DATE,
                USER_NUMBER, USER_ID,
                FILE_UPLOAD_PATH, FILE_UUID, FILE_NAME
         FROM(
@@ -63,5 +63,4 @@
     <select id="selectTotal" resultType="_int">
         SELECT COUNT(BOARD_NUMBER) FROM TBL_BOARD
     </select>
-
 </mapper>

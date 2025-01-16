@@ -15,69 +15,7 @@ body {
     background-color: #f9f9f9;
 }
 
-/* 헤더 스타일 */
-.header {
-    background-color: #fff;
-    border-bottom: 1px solid #ebebeb;
-    padding: 14px 0;
-}
 
-.header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 80%;
-    margin: 0 auto;
-}
-
-.logo {
-    font-size: 33px;
-    font-weight: bold;
-    color: #000;
-    text-decoration: none;
-}
-
-.nav {
-    display: flex;
-}
-
-.nav-item {
-    font-size: 16px;
-    color: #00c7ae;
-    text-decoration: none;
-    margin-left: 20px;
-    border: 1px solid #00c7ae;
-    border-radius: 5px;
-    padding: 7px;
-}
-
-.nav-item:hover {
-    background-color: #00c7ae;
-    color: white;
-}
-
-.header2 .nav1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 100px;
-}
-
-.header2 .nav1 .nav-item2 {
-    font-size: 25px;
-    font-weight: bold;
-    color: #333;
-    letter-spacing: 1.5px;
-    text-decoration: none;
-    transition: color 0.3s ease;
-    line-height: 40px; /* 추가: line-height 조정 */
-    display: inline-flex; /* 추가: flex로 정렬 */
-    align-items: center; /* 추가: 세로 정렬 */
-    margin: 0;
-}
-.header2 .nav1 .nav-item2:hover {
-    color: #007BFF;
-}
 
 /* 보드 스타일 */
 .board {

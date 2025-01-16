@@ -7,7 +7,23 @@
        <selectKey keyProperty="clientNumber" order="BEFORE" resultType="long">
            SELECT SEQ_client.NEXTVAL FROM DUAL
        </selectKey>
-       insert into TBL_CLIENT (CLIENT_NUMBER, START_TIME, END_TIME, PAY, REQUIRE)
-       values (#{clientNumber},#{startTime} , #{endTime},#{pay}, #{require})
+       insert into TBL_CLIENT (CLIENT_NUMBER, START_TIME, END_TIME, PAY, REQUIRE, user_number)
+       values (#{clientNumber},#{startTime} , #{endTime},#{pay}, #{require} , #{userNumber})
     </insert>
+
+    <select id="selectList" resultType="clientVo">
+        SELECT DISTINCT
+            c.*,
+            u.user_id,
+            u.user_name,
+            u.user_phone,
+            u.user_address,
+            u.field1,
+            u.field2,
+            u.choice
+        FROM tbl_client c
+                 JOIN tbl_user u
+                      ON c.user_number = u.user_number
+        WHERE u.user_type = 1
+    </select>
 </mapper>

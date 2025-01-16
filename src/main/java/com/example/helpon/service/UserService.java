@@ -2,6 +2,7 @@ package com.example.helpon.service;
 
 import com.example.helpon.dto.*;
 import com.example.helpon.mapper.*;
+import com.example.helpon.vo.ClientVo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,7 @@ public class UserService {
         if(userDto == null){ throw new IllegalArgumentException("회원 정보 누락");}
         if(clientDto == null){ throw new IllegalArgumentException("의뢰인 정보 누락");}
         userMapper.insert(userDto);
+        clientDto.setUserNumber(userDto.getUserNumber());
         clientMapper.insert(clientDto);
         for (Long dayNumber : dayNumbers) {
             Desired_dayDto desiredDayDto = new Desired_dayDto();
@@ -81,4 +83,9 @@ public class UserService {
                 .orElseThrow(()->{throw new IllegalArgumentException("존재하지 않는 회원입니다.");});
     }
 
+    //클라이언트 리스트 가져오기
+    @Transactional(readOnly = true)
+    public List<ClientVo> findClientList(){
+        return clientMapper.selectList();
+    }
 }

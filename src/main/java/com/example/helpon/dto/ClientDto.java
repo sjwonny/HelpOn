@@ -14,4 +14,5 @@ public class ClientDto {
     private Long endTime;
     private Long pay;
     private String require;
+    private Long userNumber;
 }
